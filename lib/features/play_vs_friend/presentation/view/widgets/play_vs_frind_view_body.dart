@@ -5,6 +5,9 @@ import 'package:x_o_game_app/core/utils/app_color.dart';
 import 'package:x_o_game_app/core/widgets/custom_score_container.dart';
 import 'package:x_o_game_app/features/play_vs_friend/presentation/view/widgets/custom_score_row.dart';
 
+import '../../../../../core/widgets/custom_alert_dialog.dart';
+import '../../../../home/presentation/view/home_view.dart';
+
 class PlayVsFrindViewBody extends StatefulWidget {
   const PlayVsFrindViewBody({super.key});
 
@@ -80,7 +83,7 @@ class _PlayVsFrindViewBodyState extends State<PlayVsFrindViewBody> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(color: AppColor.secondaryColor),
+      decoration: const BoxDecoration(color: AppColors.secondaryColor),
       child: Stack(
         children: [
           Column(
@@ -93,12 +96,23 @@ class _PlayVsFrindViewBodyState extends State<PlayVsFrindViewBody> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      showDialog(
+                        context: context,
+                        builder: (context) => CustomAlertDialog(
+                          onPress: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => const HomeView(),
+                              ),
+                            );
+                          },
+                        ),
+                      );
                     },
                     icon: const Icon(
                       Icons.arrow_back_ios,
                       size: 35,
-                      color: AppColor.wihte,
+                      color: AppColors.wihte,
                     ),
                   ),
                   const Text(
@@ -106,7 +120,7 @@ class _PlayVsFrindViewBodyState extends State<PlayVsFrindViewBody> {
                     style: TextStyle(
                         fontSize: 35,
                         fontFamily: 'BungeeShade',
-                        color: AppColor.wihte),
+                        color: AppColors.wihte),
                   ),
                   IconButton(
                     onPressed: () {
@@ -121,7 +135,7 @@ class _PlayVsFrindViewBodyState extends State<PlayVsFrindViewBody> {
                     icon: const Icon(
                       Icons.restart_alt,
                       size: 35,
-                      color: AppColor.wihte,
+                      color: AppColors.wihte,
                     ),
                   ),
                 ],
@@ -137,7 +151,7 @@ class _PlayVsFrindViewBodyState extends State<PlayVsFrindViewBody> {
                 style: const TextStyle(
                     fontSize: 20,
                     fontFamily: 'PressStart2P',
-                    color: AppColor.liteColor),
+                    color: AppColors.liteColor),
               ),
               const SizedBox(
                 height: 30,
@@ -145,7 +159,7 @@ class _PlayVsFrindViewBodyState extends State<PlayVsFrindViewBody> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  height: 450,
+                  height: MediaQuery.sizeOf(context).height / 2,
                   child: GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -207,7 +221,7 @@ class _PlayVsFrindViewBodyState extends State<PlayVsFrindViewBody> {
                               style: const TextStyle(
                                   fontSize: 45,
                                   fontFamily: 'PressStart2P',
-                                  color: AppColor.wihte),
+                                  color: AppColors.wihte),
                             ),
                           ),
                         ),

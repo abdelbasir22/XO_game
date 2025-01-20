@@ -16,13 +16,13 @@ class ScoreContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 200,
-      width: 130,
+      width: MediaQuery.sizeOf(context).width / 3.2,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(22),
         border: Border.all(
           width: 2,
-          color: AppColor.black,
+          color: AppColors.black,
         ),
       ),
       child: Column(
@@ -32,21 +32,21 @@ class ScoreContainer extends StatelessWidget {
             style: const TextStyle(
                 fontSize: 60,
                 fontFamily: 'BungeeShade',
-                color: AppColor.darkColor),
+                color: AppColors.darkColor),
           ),
           const Text(
             'SCORE',
             style: TextStyle(
                 fontSize: 25,
                 fontFamily: 'BungeeShade',
-                color: AppColor.darkColor),
+                color: AppColors.darkColor),
           ),
           Text(
             score,
             style: const TextStyle(
                 fontSize: 30,
                 fontFamily: 'PressStart2P',
-                color: AppColor.darkColor),
+                color: AppColors.darkColor),
           ),
         ],
       ),

@@ -26,7 +26,7 @@ class CoustomScoreRowComputer extends StatelessWidget {
           ScoreContainer(
             player: 'X',
             score: xScore.toString(),
-            color: AppColor.blue,
+            color: AppColors.blue,
           ),
           DrawContainer(
             draw: 'Draw:$drawScore',
@@ -34,7 +34,7 @@ class CoustomScoreRowComputer extends StatelessWidget {
           ScoreContainer(
             player: 'O',
             score: oScore.toString(),
-            color: AppColor.wihte,
+            color: AppColors.wihte,
           ),
         ],
       ),

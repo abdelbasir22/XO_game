@@ -18,13 +18,13 @@ class CustomScoreContainer extends StatelessWidget {
         child: Container(
           height: 150,
           width: double.infinity,
-          decoration: const BoxDecoration(color: AppColor.darkColor),
+          decoration: const BoxDecoration(color: AppColors.darkColor),
           child: Center(
             child: Text(
               winPlayer == 'Draw' ? 'Draw' : '$winPlayer is win',
               style: const TextStyle(
                   fontSize: 60,
-                  color: AppColor.liteColor,
+                  color: AppColors.liteColor,
                   fontFamily: 'BungeeShade'),
             ),
           ),

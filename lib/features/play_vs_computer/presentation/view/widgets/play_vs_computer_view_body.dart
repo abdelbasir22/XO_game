@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:x_o_game_app/core/widgets/custom_alert_dialog.dart';
+import 'package:x_o_game_app/features/home/presentation/view/home_view.dart';
 import 'package:x_o_game_app/features/play_vs_computer/presentation/view/widgets/custom_score_row_computer.dart';
 
 import '../../../../../core/utils/app_color.dart';
@@ -162,7 +164,7 @@ class _PlayVsComputerViewBodyState extends State<PlayVsComputerViewBody> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(color: AppColor.secondaryColor),
+      decoration: const BoxDecoration(color: AppColors.secondaryColor),
       child: Stack(
         children: [
           Column(
@@ -175,20 +177,31 @@ class _PlayVsComputerViewBodyState extends State<PlayVsComputerViewBody> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      showDialog(
+                        context: context,
+                        builder: (context) => CustomAlertDialog(
+                          onPress: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => const HomeView(),
+                              ),
+                            );
+                          },
+                        ),
+                      );
                     },
                     icon: const Icon(
                       Icons.arrow_back_ios,
                       size: 35,
-                      color: AppColor.wihte,
+                      color: AppColors.wihte,
                     ),
                   ),
                   const Text(
                     'VS Computer',
                     style: TextStyle(
-                        fontSize: 35,
+                        fontSize: 30,
                         fontFamily: 'BungeeShade',
-                        color: AppColor.wihte),
+                        color: AppColors.wihte),
                   ),
                   IconButton(
                     onPressed: () {
@@ -202,7 +215,7 @@ class _PlayVsComputerViewBodyState extends State<PlayVsComputerViewBody> {
                     icon: const Icon(
                       Icons.restart_alt,
                       size: 35,
-                      color: AppColor.wihte,
+                      color: AppColors.wihte,
                     ),
                   ),
                 ],
@@ -217,7 +230,7 @@ class _PlayVsComputerViewBodyState extends State<PlayVsComputerViewBody> {
                 style: TextStyle(
                     fontSize: 20,
                     fontFamily: 'PressStart2P',
-                    color: AppColor.liteColor),
+                    color: AppColors.liteColor),
               ),
               const SizedBox(
                 height: 30,
@@ -225,7 +238,7 @@ class _PlayVsComputerViewBodyState extends State<PlayVsComputerViewBody> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  height: 450,
+                  height: MediaQuery.sizeOf(context).height / 2,
                   child: GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -263,7 +276,7 @@ class _PlayVsComputerViewBodyState extends State<PlayVsComputerViewBody> {
                               style: const TextStyle(
                                   fontSize: 45,
                                   fontFamily: 'PressStart2P',
-                                  color: AppColor.wihte),
+                                  color: AppColors.wihte),
                             ),
                           ),
                         ),

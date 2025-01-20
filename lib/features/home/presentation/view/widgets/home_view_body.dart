@@ -14,9 +14,9 @@ class HomeViewBody extends StatelessWidget {
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppColor.primaryColor,
-            AppColor.secondaryColor,
-            AppColor.tertiaryColor,
+            AppColors.primaryColor,
+            AppColors.secondaryColor,
+            AppColors.tertiaryColor,
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -33,14 +33,14 @@ class HomeViewBody extends StatelessWidget {
               style: TextStyle(
                 fontSize: 60,
                 fontFamily: 'BungeeShade',
-                color: AppColor.blue,
+                color: AppColors.blue,
               ),
             ),
             const Text(
               'TIC TAC TOE',
               style: TextStyle(
                 fontSize: 22,
-                color: AppColor.wihte,
+                color: AppColors.wihte,
                 fontFamily: 'PressStart2P',
               ),
             ),
@@ -49,7 +49,7 @@ class HomeViewBody extends StatelessWidget {
             ),
             CircleAvatar(
               radius: 175,
-              backgroundColor: AppColor.darkBlue,
+              backgroundColor: AppColors.darkBlue,
               child: ClipOval(
                 child: Image.asset(
                   'assets/images/x_o.png',
@@ -80,7 +80,7 @@ class HomeViewBody extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 15,
                     fontFamily: 'PressStart2P',
-                    color: AppColor.black,
+                    color: AppColors.black,
                     fontWeight: FontWeight.w600),
               ),
             ),
@@ -105,7 +105,7 @@ class HomeViewBody extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 15,
                     fontFamily: 'PressStart2P',
-                    color: AppColor.black,
+                    color: AppColors.black,
                     fontWeight: FontWeight.w600),
               ),
             ),

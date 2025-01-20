@@ -16,7 +16,7 @@ class DrawContainer extends StatelessWidget {
       height: 70,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(22),
-        color: AppColor.wihte,
+        color: AppColors.wihte,
       ),
       child: Center(
         child: Text(
