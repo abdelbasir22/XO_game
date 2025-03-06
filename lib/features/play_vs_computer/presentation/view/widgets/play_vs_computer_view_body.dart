@@ -17,22 +17,13 @@ class PlayVsComputerViewBody extends StatefulWidget {
 }
 
 class _PlayVsComputerViewBodyState extends State<PlayVsComputerViewBody> {
-  List grid = [
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-  ];
+  List<String> grid = List.filled(9, '');
   bool isPlay = true, isWin = false;
   String winPlayer = '';
   int xScore = 0, oScore = 0, drawScore = 0;
-  getWinner() {
-    List winIndex = [
+
+  String getWinner() {
+    List<List<int>> winIndex = [
       [0, 1, 2],
       [3, 4, 5],
       [6, 7, 8],
@@ -56,16 +47,14 @@ class _PlayVsComputerViewBodyState extends State<PlayVsComputerViewBody> {
     return '';
   }
 
-  clearGrid() {
+  void clearGrid() {
     setState(() {
-      for (var i = 0; i < grid.length; i++) {
-        grid[i] = '';
-      }
+      grid = List.filled(9, '');
     });
   }
 
   Timer? timer;
-  startTimer(bool computer) {
+  void startTimer(bool computer) {
     setState(() {
       isPlay = false;
       isWin = true;
@@ -83,64 +72,59 @@ class _PlayVsComputerViewBodyState extends State<PlayVsComputerViewBody> {
     });
   }
 
-  // computer play algo
-  playComputer() {
-    List winIndex = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
+  int minimax(List<String> board, int depth, bool isMaximizing) {
+    String result = getWinner();
+    if (result == 'O') {
+      return 1;
+    } else if (result == 'X') {
+      return -1;
+    } else if (result == 'Draw') {
+      return 0;
+    }
 
-    // o win
-    for (var i = 0; i < winIndex.length; i++) {
-      String a = grid[winIndex[i][0]];
-      String b = grid[winIndex[i][1]];
-      String c = grid[winIndex[i][2]];
-      if (a == b && a == 'O' && c == '') {
-        grid[winIndex[i][2]] = 'O';
-        return;
+    if (isMaximizing) {
+      int bestScore = -1000;
+      for (int i = 0; i < board.length; i++) {
+        if (board[i] == '') {
+          board[i] = 'O';
+          int score = minimax(board, depth + 1, false);
+          board[i] = '';
+          bestScore = max(score, bestScore);
+        }
       }
-      if (a == c && a == 'O' && b == '') {
-        grid[winIndex[i][1]] = 'O';
-        return;
+      return bestScore;
+    } else {
+      int bestScore = 1000;
+      for (int i = 0; i < board.length; i++) {
+        if (board[i] == '') {
+          board[i] = 'X';
+          int score = minimax(board, depth + 1, true);
+          board[i] = '';
+          bestScore = min(score, bestScore);
+        }
       }
-      if (c == b && b == 'O' && a == '') {
-        grid[winIndex[i][0]] = 'O';
-        return;
+      return bestScore;
+    }
+  }
+
+  void playComputer() {
+    int bestScore = -1000;
+    int bestMove = -1;
+
+    for (int i = 0; i < grid.length; i++) {
+      if (grid[i] == '') {
+        grid[i] = 'O';
+        int score = minimax(grid, 0, false);
+        grid[i] = '';
+        if (score > bestScore) {
+          bestScore = score;
+          bestMove = i;
+        }
       }
     }
 
-    // stop x
-    for (var i = 0; i < winIndex.length; i++) {
-      String a = grid[winIndex[i][0]];
-      String b = grid[winIndex[i][1]];
-      String c = grid[winIndex[i][2]];
-      if (a == b && a == 'X' && c == '') {
-        grid[winIndex[i][2]] = 'O';
-        return;
-      }
-      if (a == c && a == 'X' && b == '') {
-        grid[winIndex[i][1]] = 'O';
-        return;
-      }
-      if (c == b && b == 'X' && a == '') {
-        grid[winIndex[i][0]] = 'O';
-        return;
-      }
-    }
-    //play any way
-    List indexs = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    indexs.shuffle(Random());
-    for (var i = 0; i < grid.length; i++) {
-      if (grid[indexs[i]] == '') {
-        grid[indexs[i]] = 'O';
-        return;
-      }
+    if (bestMove != -1) {
+      grid[bestMove] = 'O';
     }
   }
 
@@ -162,6 +146,9 @@ class _PlayVsComputerViewBodyState extends State<PlayVsComputerViewBody> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(color: AppColors.secondaryColor),
@@ -169,9 +156,7 @@ class _PlayVsComputerViewBodyState extends State<PlayVsComputerViewBody> {
         children: [
           Column(
             children: [
-              const SizedBox(
-                height: 35,
-              ),
+              SizedBox(height: screenHeight * 0.05),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -190,18 +175,19 @@ class _PlayVsComputerViewBodyState extends State<PlayVsComputerViewBody> {
                         ),
                       );
                     },
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      size: 35,
-                      color: AppColors.wihte,
+                    icon: Icon(
+                      Icons.close,
+                      size: screenWidth * 0.08,
+                      color: AppColors.white,
                     ),
                   ),
-                  const Text(
+                  Text(
                     'VS Computer',
                     style: TextStyle(
-                        fontSize: 30,
-                        fontFamily: 'BungeeShade',
-                        color: AppColors.wihte),
+                      fontSize: screenWidth * 0.06,
+                      fontFamily: 'BungeeShade',
+                      color: AppColors.white,
+                    ),
                   ),
                   IconButton(
                     onPressed: () {
@@ -212,10 +198,10 @@ class _PlayVsComputerViewBodyState extends State<PlayVsComputerViewBody> {
                         drawScore = 0;
                       });
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.restart_alt,
-                      size: 35,
-                      color: AppColors.wihte,
+                      size: screenWidth * 0.08,
+                      color: AppColors.white,
                     ),
                   ),
                 ],
@@ -225,26 +211,26 @@ class _PlayVsComputerViewBodyState extends State<PlayVsComputerViewBody> {
                 drawScore: drawScore,
                 oScore: oScore,
               ),
-              const Text(
+              Text(
                 "Now it's X turn",
                 style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'PressStart2P',
-                    color: AppColors.liteColor),
+                  fontSize: screenWidth * 0.04,
+                  fontFamily: 'PressStart2P',
+                  color: AppColors.liteColor,
+                ),
               ),
-              const SizedBox(
-                height: 30,
-              ),
+              SizedBox(height: screenHeight * 0.03),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  height: MediaQuery.sizeOf(context).height / 2,
+                  height: screenHeight * 0.5,
                   child: GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            mainAxisSpacing: 0.0,
-                            crossAxisSpacing: 0.0),
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 0.0,
+                      crossAxisSpacing: 0.0,
+                    ),
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
@@ -268,15 +254,17 @@ class _PlayVsComputerViewBodyState extends State<PlayVsComputerViewBody> {
                           decoration: BoxDecoration(
                             border: Border.all(
                               width: 2,
+                              color: AppColors.white,
                             ),
                           ),
                           child: Center(
                             child: Text(
                               grid[index],
-                              style: const TextStyle(
-                                  fontSize: 45,
-                                  fontFamily: 'PressStart2P',
-                                  color: AppColors.wihte),
+                              style: TextStyle(
+                                fontSize: screenWidth * 0.1,
+                                fontFamily: 'PressStart2P',
+                                color: AppColors.white,
+                              ),
                             ),
                           ),
                         ),

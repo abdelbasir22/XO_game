@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:x_o_game_app/core/utils/app_color.dart';
-import 'package:x_o_game_app/features/play_vs_computer/presentation/view/play_vs_computer_view.dart';
-import 'package:x_o_game_app/features/play_vs_friend/presentation/view/play_vs_friend_view.dart';
+
+import '../../../../computer_mode/presentation/view/computer_mode_view.dart';
+import '../../../../player_mode/presentation/view/player_mode_view.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -40,7 +41,7 @@ class HomeViewBody extends StatelessWidget {
               'TIC TAC TOE',
               style: TextStyle(
                 fontSize: 22,
-                color: AppColors.wihte,
+                color: AppColors.white,
                 fontFamily: 'PressStart2P',
               ),
             ),
@@ -66,7 +67,7 @@ class HomeViewBody extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const PlayVsFriendView(),
+                    builder: (context) => const PlayerModeView(),
                   ),
                 );
               },
@@ -91,7 +92,7 @@ class HomeViewBody extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const PlayVsComputerView(),
+                    builder: (context) => const ComputerModeView(),
                   ),
                 );
               },

@@ -28,7 +28,7 @@ class CoustomScoreRow extends StatelessWidget {
           ScoreContainer(
             player: 'X',
             score: xScore.toString(),
-            color: (frist == 'X') ? AppColors.blue : AppColors.wihte,
+            color: (frist == 'X') ? AppColors.blue : AppColors.white,
           ),
           DrawContainer(
             draw: 'Draw:$drawScore',
@@ -36,7 +36,7 @@ class CoustomScoreRow extends StatelessWidget {
           ScoreContainer(
             player: 'O',
             score: oScore.toString(),
-            color: (frist == 'O') ? AppColors.blue : AppColors.wihte,
+            color: (frist == 'O') ? AppColors.blue : AppColors.white,
           ),
         ],
       ),

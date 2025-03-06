@@ -81,6 +81,8 @@ class _PlayVsFrindViewBodyState extends State<PlayVsFrindViewBody> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(color: AppColors.secondaryColor),
@@ -88,8 +90,8 @@ class _PlayVsFrindViewBodyState extends State<PlayVsFrindViewBody> {
         children: [
           Column(
             children: [
-              const SizedBox(
-                height: 35,
+              SizedBox(
+                height: screenHeight * 0.05,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -109,18 +111,18 @@ class _PlayVsFrindViewBodyState extends State<PlayVsFrindViewBody> {
                         ),
                       );
                     },
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      size: 35,
-                      color: AppColors.wihte,
+                    icon: Icon(
+                      Icons.close,
+                      size: screenWidth * 0.08,
+                      color: AppColors.white,
                     ),
                   ),
-                  const Text(
+                  Text(
                     'VS Friend',
                     style: TextStyle(
-                        fontSize: 35,
+                        fontSize: screenWidth * 0.06,
                         fontFamily: 'BungeeShade',
-                        color: AppColors.wihte),
+                        color: AppColors.white),
                   ),
                   IconButton(
                     onPressed: () {
@@ -132,10 +134,10 @@ class _PlayVsFrindViewBodyState extends State<PlayVsFrindViewBody> {
                         frist = 'X';
                       });
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.restart_alt,
-                      size: 35,
-                      color: AppColors.wihte,
+                      size: screenWidth * .08,
+                      color: AppColors.white,
                     ),
                   ),
                 ],
@@ -148,18 +150,18 @@ class _PlayVsFrindViewBodyState extends State<PlayVsFrindViewBody> {
               ),
               Text(
                 "Now it's $frist turn",
-                style: const TextStyle(
-                    fontSize: 20,
+                style: TextStyle(
+                    fontSize: screenWidth * 0.04,
                     fontFamily: 'PressStart2P',
                     color: AppColors.liteColor),
               ),
-              const SizedBox(
-                height: 30,
+              SizedBox(
+                height: screenHeight * 0.03,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  height: MediaQuery.sizeOf(context).height / 2,
+                  height: screenHeight * 0.5,
                   child: GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -213,15 +215,16 @@ class _PlayVsFrindViewBodyState extends State<PlayVsFrindViewBody> {
                           decoration: BoxDecoration(
                             border: Border.all(
                               width: 2,
+                              color: AppColors.white,
                             ),
                           ),
                           child: Center(
                             child: Text(
                               grid[index],
-                              style: const TextStyle(
-                                  fontSize: 45,
+                              style: TextStyle(
+                                  fontSize: screenWidth * 0.1,
                                   fontFamily: 'PressStart2P',
-                                  color: AppColors.wihte),
+                                  color: AppColors.white),
                             ),
                           ),
                         ),

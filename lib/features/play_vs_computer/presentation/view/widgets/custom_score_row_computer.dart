@@ -34,7 +34,7 @@ class CoustomScoreRowComputer extends StatelessWidget {
           ScoreContainer(
             player: 'O',
             score: oScore.toString(),
-            color: AppColors.wihte,
+            color: AppColors.white,
           ),
         ],
       ),
