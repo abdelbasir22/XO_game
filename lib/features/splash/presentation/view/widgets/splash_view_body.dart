@@ -11,7 +11,7 @@ class SplashViewBody extends StatefulWidget {
 class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(milliseconds: 1500), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const HomeView(),
